@@ -20,26 +20,28 @@ html {
   .wrapper {
     display: flex;
     flex-direction: column;
+    position: relative;
     align-items: center;
     justify-content: center;
     margin: 0 auto;
     max-width: 800px;
     height: 100vh;
+    padding-top: 10vh;
   }
-  
+
   .header {
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #fff;
     height: 10vh;
-    position: fixed;
+    position: sticky; 
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
   }
-  
+
   .menu {
     position: fixed;
     bottom: 0;
@@ -58,54 +60,64 @@ html {
     align-items: center;
     gap: 20px;
   }
-  
-  .content {
-    padding: 20px;
-    margin-top: 10vh;
-    margin-left: 20%;
-    align-items: center;
-    overflow: auto;
-    height: calc(90vh - 20px);
+
+  .menu__item {
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   
+  .menu__item:hover {
+    background-color: #ddd;
+  }
+  
+  .menu__link {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .menu__link:hover {
+    background-color: #ddd;
+  }
+
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.5s ease;
+  }
+
   .content > div {
+    position: inherit;
+    
+    padding: 20px;
+    overflow-y: auto;
     display: none;
   }
   
   .content > div.active {
     display: block;
   }
-
-/* 
-.content.active {
-    display: flex;
-}
-
-
-.content-1 {
-    display: none;
-}
-
-.content-2 {
-    display: none;
-}
-
-.content-3 {
-    display: none;
-}
-
-.content-4 {
-    display: none;
-}
-
-.content-5 {
-    display: none;
-}
-
-.menu__item:nth-child(1):target ~ .content-1,
-.menu__item:nth-child(2):target ~ .content-2,
-.menu__item:nth-child(3):target ~ .content-3,
-.menu__item:nth-child(4):target ~ .content-4,
-.menu__item:nth-child(5):target ~ .content-5 {
-    display: block;
-} */
+  
+  .content-1 {
+    background-color: #f1c40f;
+  }
+  
+  .content-2 {
+    background-color: #2ecc71;
+  }
+  
+  .content-3 {
+    background-color: #e74c3c;
+  }
+  
+  .content-4 {
+    background-color: #9b59b6;
+  }
+  
+  .content-5 {
+    background-color: #3498db;
+  }

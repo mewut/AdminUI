@@ -1,4 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
+  fetch('data.json')
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      Object.keys(data).forEach(key => {
+        const contentElement = document.querySelector(`.content-${key.split('-')[1]}`);
+        const titleElement = document.createElement('h2');
+        titleElement.textContent = data[key].title;
+        const textElement = document.createElement('p');
+        textElement.textContent = data[key].text;
+
+        contentElement.appendChild(titleElement);
+        contentElement.appendChild(textElement);
+      });
+    })
+    .catch(error => {
+      console.error('Ошибка при загрузке данных:', error);
+    });
+
   const menuLinks = document.querySelectorAll('.menu__link');
   const contentBlocks = document.querySelectorAll('.content > div');
 
@@ -10,7 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function showContent(index) {
-    contentBlocks.forEach((block, i) => {
+    const contentHeight = document.querySelector('.content').offsetHeight;
+    document.querySelector('.content').style.transform = `translateY(-${contentHeight * index}px)`
+    console.log(index);
+  
+    const contentBlocksArray = Array.from(contentBlocks);
+    contentBlocksArray.forEach((block, i) => {
       if (i === index) {
         block.classList.add('active');
       } else {
@@ -19,33 +43,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-
-
-//   document.querySelectorAll('.menu__link').forEach((link, index) => {
-//     link.addEventListener('click', () => {
-//         document.querySelectorAll('.content-1, .content-2, .content-3, .content-4, .content-5').forEach(content => {
-//             content.style.display = 'none';
-//         });
-//         document.querySelector(`.content-${index + 1}`).style.display = 'block';
-//     });
-// });
-
-
-
-  fetch('data.json')
-  .then(response => response.json())
-  .then(data => {
-    Object.keys(data).forEach(key => {
-      const contentElement = document.querySelector(`.${key}`);
-      const titleElement = document.createElement('h1');
-      titleElement.textContent = data[key].title;
-      const textElement = document.createElement('p');
-      textElement.textContent = data[key].text;
-
-      contentElement.appendChild(titleElement);
-      contentElement.appendChild(textElement);
-    });
-  })
-  .catch(error => {
-    console.error('Ошибка при загрузке данных:', error);
-  });
