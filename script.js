@@ -1,11 +1,34 @@
-document.querySelectorAll('.menu__link').forEach((link, index) => {
-    link.addEventListener('click', () => {
-        document.querySelectorAll('.content-1, .content-2, .content-3, .content-4, .content-5').forEach(content => {
-            content.style.display = 'none';
-        });
-        document.querySelector(`.content-${index + 1}`).style.display = 'block';
+document.addEventListener('DOMContentLoaded', () => {
+  const menuLinks = document.querySelectorAll('.menu__link');
+  const contentBlocks = document.querySelectorAll('.content > div');
+
+  menuLinks.forEach((link, index) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      showContent(index);
     });
+  });
+
+  function showContent(index) {
+    contentBlocks.forEach((block, i) => {
+      if (i === index) {
+        block.classList.add('active');
+      } else {
+        block.classList.remove('active');
+      }
+    });
+  }
 });
+
+
+//   document.querySelectorAll('.menu__link').forEach((link, index) => {
+//     link.addEventListener('click', () => {
+//         document.querySelectorAll('.content-1, .content-2, .content-3, .content-4, .content-5').forEach(content => {
+//             content.style.display = 'none';
+//         });
+//         document.querySelector(`.content-${index + 1}`).style.display = 'block';
+//     });
+// });
 
 
 
