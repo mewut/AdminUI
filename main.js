@@ -6,14 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             textareaStaff.value = data.staff.join('\n');
-
             mainData = JSON.parse(JSON.stringify(data));
         })
         .catch(error => {
             console.error('Ошибка при загрузке данных', error);
         });
-
-
 
     let newData = null;
 
@@ -23,28 +20,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     saveButton.addEventListener('click', () => {
-        // сравнили. И если данные различаются, то:
+        
         if (JSON.stringify(mainData) !== JSON.stringify(newData)) {
-            // не будет работать, нет сервера. Но я хочу сохранить как заготовку
-            fetch('main.json', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newData)
-            })
-                .then(response => {
-                    console.log('Данные успешно сохранены');
-                    // обновляем исходные данные
-                    mainData = JSON.parse(JSON.stringify(newData));
-                })
-                .catch(error => {
-                    console.error('Ошибка при сохранении данных', error);
-                });
+            // положим данные в Localstorage браузера, будем имитировать сервер х)
+            localStorage.setItem('mainData', JSON.stringify(newData));
+            console.log('Данные успешно сохранены');
+            console.log(newData);
+            
+            mainData = JSON.parse(JSON.stringify(newData));
         } else {
             console.log('Данные не были изменены');
         }
     });
 });
-
-//gitlens try
