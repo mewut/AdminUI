@@ -121,3 +121,8 @@ html {
   .content-5 {
     background-color: #3498db;
   }
+
+  .content textarea {
+    width: 50vw;
+    height: 50vh;
+  }
